@@ -16,12 +16,15 @@
       <div class="btn btn-play"></div>
     </div>
 
+    <!-- Do I need to use fetch like with api class free music api maybe instead local storage audio?  -->
+
     <script>
       const btn = document.querySelector(".btn");
       const audio = document.querySelector("audio");
       const visualizer = document.querySelector(".visualizer");
 
       btn.addEventListener("click", (e) => {
+        ctx.resume();
         audio.paused ? audio.play() : audio.pause();
         btn.classList.toggle("btn-play");
         btn.classList.toggle("btn-pause");
@@ -29,6 +32,7 @@
 
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new window.AudioContext();
+      ctx.suspend();
       const analyser = ctx.createAnalyser();
       const source = ctx.createMediaElementSource(audio);
       source.connect(analyser);
